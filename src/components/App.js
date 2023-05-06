@@ -8,10 +8,10 @@ import { SelectedProvider } from "./SelectedContext";
 function App() {
   return (
     <SelectedProvider>
-    <Segment id="app">
-      <WestworldMap />
-      <Headquarters />
-    </Segment>
+      <Segment id="app">
+        <WestworldMap />
+        <Headquarters />
+      </Segment>
     </SelectedProvider>
   );
 }

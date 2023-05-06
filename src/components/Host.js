@@ -8,7 +8,7 @@ function Host({host}) {
   return (
     <Card
       className={`host + ${ host.id === selectedId ? 'selected' : null }`}
-      onClick={/* On Click what? */ null}
+      onClick={()=> setSelectedId(host.id === selectedId ? null : host.id)}
       image={host.imageUrl}
       raised
       link
