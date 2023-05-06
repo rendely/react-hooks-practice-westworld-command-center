@@ -10,7 +10,8 @@ import {
 } from "semantic-ui-react";
 import "../stylesheets/HostInfo.css";
 
-function HostInfo() {
+function HostInfo( {selectedId, setSelectedId}) {
+
   // This state is just to show how the dropdown component works.
   // Options have to be formatted in this way (array of objects with keys of: key, text, value)
   // Value has to match the value in the object to render the right text.
@@ -47,7 +48,7 @@ function HostInfo() {
         <Card>
           <Card.Content>
             <Card.Header>
-              {"Bob"} | {true ? <Icon name="man" /> : <Icon name="woman" />}
+              {"Bob"} {selectedId} | {true ? <Icon name="man" /> : <Icon name="woman" />}
               {/* Think about how the above should work to conditionally render the right First Name and the right gender Icon */}
             </Card.Header>
             <Card.Meta>

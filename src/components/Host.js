@@ -1,12 +1,13 @@
-import React from "react";
+import React, {useContext} from "react";
 import { Card } from "semantic-ui-react";
 import "../stylesheets/Host.css";
+import { SelectedContext } from "./SelectedContext";
 
 function Host({host}) {
-  /* NOTE: The className "host selected" renders a different style than simply "host". */
+  const {selectedId, setSelectedId} = useContext(SelectedContext);
   return (
     <Card
-      className="host selected"
+      className={`host + ${ host.id === selectedId ? 'selected' : null }`}
       onClick={/* On Click what? */ null}
       image={host.imageUrl}
       raised

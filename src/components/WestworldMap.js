@@ -10,7 +10,6 @@ function WestworldMap() {
   .then(areas => setAreas(areas))
   ,[]);
 
-  console.log(areas);
   return <Segment id="map">{areas.map(area => <Area key={area.id} area={area}/>)}</Segment>;
 }
 
