@@ -7,7 +7,7 @@ function Area({area}) {
   const [hosts, setHosts] = useState([]);
 
   useEffect(()=> {
-    fetch('http://localhost:3001/hosts?area='+area.name)
+    fetch('http://localhost:3001/hosts?active=true&area='+area.name)
     .then(r=> r.json())
     .then(hosts => setHosts(hosts));
   },[]);
