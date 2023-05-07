@@ -14,12 +14,6 @@ import { HostsContext } from "./HostsContext";
 
 function HostInfo() {
   const {selectedId, setSelectedId, hosts, setHosts} = useContext(HostsContext);
-
-  // This state is just to show how the dropdown component works.
-  // Options have to be formatted in this way (array of objects with keys of: key, text, value)
-  // Value has to match the value in the object to render the right text.
-
-  // IMPORTANT: But whether it should be stateful or not is entirely up to you. Change this component however you like.
   const [options] = useState([
     { key: "some_area", text: "Some Area", value: "some_area" },
     { key: "another_area", text: "Another Area", value: "another_area" },
@@ -29,6 +23,7 @@ function HostInfo() {
   const [thisHost] = hosts.filter(h => h.id === selectedId);
 
   function handleOptionChange(e, { value }) {
+    console.log(value);
     // the 'value' attribute is given via Semantic's Dropdown component.
     // Put a debugger or console.log in here and see what the "value" variable is when you pass in different options.
     // See the Semantic docs for more info: https://react.semantic-ui.com/modules/dropdown/#usage-controlled
@@ -39,7 +34,7 @@ function HostInfo() {
     fetch('http://localhost:3001/hosts/'+selectedId,{
       method: "PATCH",
       headers: {"Content-type": "application/json"},
-      body: JSON.stringify({active: true})
+      body: JSON.stringify({active: !thisHost.active})
     })
      .then(r => r.json())
      .then(updatedHost => setHosts(hosts => hosts.map(h => h.id === updatedHost.id ? updatedHost : h)))
@@ -49,7 +44,7 @@ function HostInfo() {
     <Grid>
       <Grid.Column width={6}>
         <Image
-          src={/* pass in the right image here */ ""}
+          src={thisHost.imageUrl}
           floated="left"
           size="small"
           className="hostImg"
@@ -59,7 +54,7 @@ function HostInfo() {
         <Card>
           <Card.Content>
             <Card.Header>
-              {thisHost.firstName} | {true ? <Icon name="man" /> : <Icon name="woman" />}
+              {thisHost.firstName} | {thisHost.gender === 'Male' ? <Icon name="man" /> : <Icon name="woman" />}
               {/* Think about how the above should work to conditionally render the right First Name and the right gender Icon */}
             </Card.Header>
             <Card.Meta>
@@ -68,7 +63,7 @@ function HostInfo() {
               <Radio
                 onChange={handleRadioChange}
                 label={"Active"}
-                checked={true}
+                checked={thisHost.active}
                 slider
               />
             </Card.Meta>
