@@ -3,16 +3,16 @@ import { Segment } from "semantic-ui-react";
 import "../stylesheets/App.css";
 import WestworldMap from "./WestworldMap";
 import Headquarters from "./Headquarters";
-import { SelectedProvider } from "./SelectedContext";
+import { HostsProvider } from "./HostsContext";
 
 function App() {
   return (
-    <SelectedProvider>
+    <HostsProvider>
       <Segment id="app">
         <WestworldMap />
         <Headquarters />
       </Segment>
-    </SelectedProvider>
+    </HostsProvider>
   );
 }
 

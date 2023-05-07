@@ -31,7 +31,14 @@ function HostInfo( {selectedId, setSelectedId}) {
   }
 
   function handleRadioChange() {
-    console.log("The radio button fired");
+    console.log("The radio button fired", selectedId);
+    fetch('http://localhost:3001/hosts/'+selectedId,{
+      method: "PATCH",
+      headers: {"Content-type": "application/json"},
+      body: JSON.stringify({active: true})
+    })
+     .then(r => r.json())
+     .then(updatedHost => console.log(updatedHost))
   }
 
   return (

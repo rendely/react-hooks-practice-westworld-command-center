@@ -1,10 +1,10 @@
 import React, {useContext} from "react";
 import { Card } from "semantic-ui-react";
 import "../stylesheets/Host.css";
-import { SelectedContext } from "./SelectedContext";
+import { HostsContext } from "./HostsContext";
 
 function Host({host}) {
-  const {selectedId, setSelectedId} = useContext(SelectedContext);
+  const {selectedId, setSelectedId} = useContext(HostsContext);
   return (
     <Card
       className={`host + ${ host.id === selectedId ? 'selected' : null }`}
