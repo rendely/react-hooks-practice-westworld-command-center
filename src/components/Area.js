@@ -1,16 +1,13 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useContext, useState} from "react";
 import "../stylesheets/Area.css";
 import HostList from "./HostList";
+import { HostsContext } from "./HostsContext";
+
 
 function Area({area}) {
 
-  const [hosts, setHosts] = useState([]);
-
-  useEffect(()=> {
-    fetch('http://localhost:3001/hosts?active=true&area='+area.name)
-    .then(r=> r.json())
-    .then(hosts => setHosts(hosts));
-  },[]);
+  const {hosts, setHosts} = useContext(HostsContext);
+  const areaHosts = hosts.filter(h => h.active && h.area === area.name);
 
   return (
     <div
@@ -20,7 +17,7 @@ function Area({area}) {
       <h3 className="labels">
         {area.name.replaceAll('_',' ')}
       </h3>
-      <HostList hosts={hosts}/>
+      <HostList hosts={areaHosts}/>
     </div>
   );
 }

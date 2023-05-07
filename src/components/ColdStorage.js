@@ -1,15 +1,11 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useContext, useState} from "react";
 import { Segment } from "semantic-ui-react";
 import HostList from "./HostList";
+import { HostsContext } from "./HostsContext";
 
 function ColdStorage() {
-  const [hosts, setHosts] = useState([]);
-
-  useEffect(()=> {
-    fetch('http://localhost:3001/hosts?active=false')
-    .then(r=> r.json())
-    .then(hosts => setHosts(hosts));
-  },[]);
+  const {hosts, setHosts} = useContext(HostsContext);
+  const coldHosts = hosts.filter(h => !h.active);
 
   return (
     <Segment.Group className="HQComps">
@@ -17,7 +13,7 @@ function ColdStorage() {
         <h3 className="labels">ColdStorage</h3>
       </Segment>
       <Segment compact>
-        <HostList hosts={hosts} />
+        <HostList hosts={coldHosts} />
       </Segment>
     </Segment.Group>
   );

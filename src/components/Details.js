@@ -7,11 +7,11 @@ import { HostsContext } from "./HostsContext";
 function Details() {
   // We'll render the logo if no host is selected. But if a host does get selected....
   // Watch the video to see how this works in the app.
-  const {selectedId, setSelectedId} = useContext(HostsContext);
+  const {selectedId} = useContext(HostsContext);
 
   return (
     <Segment id="details" className="HQComps">
-      {!selectedId ? <Image size="medium" src={Images.westworldLogo} /> : <HostInfo selectedId={selectedId} setSelectedId={setSelectedId} />}
+      {!selectedId ? <Image size="medium" src={Images.westworldLogo} /> : <HostInfo />}
     </Segment>
   );
 }

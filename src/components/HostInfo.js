@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   Radio,
   Icon,
@@ -9,8 +9,11 @@ import {
   Divider,
 } from "semantic-ui-react";
 import "../stylesheets/HostInfo.css";
+import { HostsContext } from "./HostsContext";
 
-function HostInfo( {selectedId, setSelectedId}) {
+
+function HostInfo() {
+  const {selectedId, setSelectedId, hosts, setHosts} = useContext(HostsContext);
 
   // This state is just to show how the dropdown component works.
   // Options have to be formatted in this way (array of objects with keys of: key, text, value)
@@ -23,6 +26,7 @@ function HostInfo( {selectedId, setSelectedId}) {
   ]);
 
   const [value] = useState("some_area");
+  const [thisHost] = hosts.filter(h => h.id === selectedId);
 
   function handleOptionChange(e, { value }) {
     // the 'value' attribute is given via Semantic's Dropdown component.
@@ -38,7 +42,7 @@ function HostInfo( {selectedId, setSelectedId}) {
       body: JSON.stringify({active: true})
     })
      .then(r => r.json())
-     .then(updatedHost => console.log(updatedHost))
+     .then(updatedHost => setHosts(hosts => hosts.map(h => h.id === updatedHost.id ? updatedHost : h)))
   }
 
   return (
@@ -55,7 +59,7 @@ function HostInfo( {selectedId, setSelectedId}) {
         <Card>
           <Card.Content>
             <Card.Header>
-              {"Bob"} {selectedId} | {true ? <Icon name="man" /> : <Icon name="woman" />}
+              {thisHost.firstName} | {true ? <Icon name="man" /> : <Icon name="woman" />}
               {/* Think about how the above should work to conditionally render the right First Name and the right gender Icon */}
             </Card.Header>
             <Card.Meta>
