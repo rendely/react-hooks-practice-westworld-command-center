@@ -3,6 +3,11 @@ import "../stylesheets/Area.css";
 import HostList from "./HostList";
 import { HostsContext } from "./HostsContext";
 
+function titleCase(word){
+  const words = word.split('_');
+  const capitalizedWords = words.map(w => w[0].toUpperCase() + w.slice(1));
+  return capitalizedWords.join(' ');
+}
 
 function Area({area}) {
 
@@ -15,7 +20,7 @@ function Area({area}) {
       id={area.name}
     >
       <h3 className="labels">
-        {area.name.replaceAll('_',' ')}
+        {titleCase(area.name)}
       </h3>
       <HostList hosts={areaHosts}/>
     </div>
